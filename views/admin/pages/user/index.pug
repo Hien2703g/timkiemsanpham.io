@@ -1,0 +1,44 @@
+extends ../../layouts/default.pug
+include ../../mixins/search.pug
+block main 
+    h1 Trang tong danh sach san pham
+    .card.mb-3 
+        .card-header Bo loc va tim kiem 
+        .card-body 
+        .row
+            //- .col-6
+            //-     +filter-status(filterStatus)
+            .col-6 
+                +search(keyword)           
+    .card.mb-3 
+        .card-header Danh sach 
+            .card-body 
+            table(
+                    class="table table-hover table-sm"
+                    checkbock-multi
+
+                )
+                    thead   
+                        tr  
+                           
+                            th STT 
+                            th FullName
+                            th ảnh đại diện
+                            th gender
+                            th email
+                            th so dien thoai 
+                            th trang thai
+                    tbody 
+                        each User,index in user
+                            tr   
+                                td #{index+1} 
+                                td #{User.fullName}
+                                td 
+                                td #{User.gender}
+                                td #{User.email}
+                                td #{User.phone}
+                                td #{User.statusOnline}                        
+                                td  
+                                    button(class="btn btn-warning btn-sm") Sua 
+                                    button(class="btn btn-danger btn-sm ml-1") Xóa  
+        script(src="/admin/js/user.js")
