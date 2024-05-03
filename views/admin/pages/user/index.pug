@@ -1,18 +1,27 @@
 extends ../../layouts/default.pug
 include ../../mixins/search.pug
+include ../../mixins/pagination.pug
 block main 
     h1 Trang tong danh sach san pham
     .card.mb-3 
         .card-header Bo loc va tim kiem 
         .card-body 
         .row
-            //- .col-6
-            //-     +filter-status(filterStatus)
+            
             .col-6 
                 +search(keyword)           
     .card.mb-3 
         .card-header Danh sach 
             .card-body 
+                .row 
+                    
+                    .col-2 
+                        a(
+                            href=`${prefixAdmin}/user/create`
+                            class="btn btn-outline-success"
+                        ) + thêm mới
+
+
             table(
                     class="table table-hover table-sm"
                     checkbock-multi
@@ -22,23 +31,53 @@ block main
                         tr  
                            
                             th STT 
-                            th FullName
-                            th ảnh đại diện
+                            th FirstName
+                            th LastName
+                            th MaidenName
+                            th Hình Ảnh
+                            th Chức vụ
                             th gender
                             th email
                             th so dien thoai 
-                            th trang thai
+                            th Tuổi 
+                            th  
                     tbody 
                         each User,index in user
                             tr   
                                 td #{index+1} 
-                                td #{User.fullName}
-                                td 
+                                td #{User.firstName} 
+                                td #{User.lastName} 
+                                td #{User.maidenName}
+                                td
+                                    img(
+                                        src=User.image
+                                        alt=User.username
+                                        width="100px"
+                                        height="auto"
+                                    ) 
+                                td #{User.position}
                                 td #{User.gender}
                                 td #{User.email}
                                 td #{User.phone}
-                                td #{User.statusOnline}                        
+                                td #{User.age}  
+                                td #{User.brithDate}
+                                                     
                                 td  
-                                    button(class="btn btn-warning btn-sm") Sua 
-                                    button(class="btn btn-danger btn-sm ml-1") Xóa  
+                                    a(
+                                        href=`${prefixAdmin}/user/edit/${User.id}`
+                                        class="btn btn-warning btn-sm"
+                                    ) Sua 
+                                    button(
+                                        class="btn btn-danger btn-sm ml-1"
+                                        button-delete
+                                        data-id=User.id
+                                    ) Xóa 
+
+        +Pagination(pagination)
+        form(
+            action=""
+            method="POST"
+            id="form-delete-user"
+            data-path=`${prefixAdmin}/user/delete`
+        )
         script(src="/admin/js/user.js")

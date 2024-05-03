@@ -1,0 +1,98 @@
+extends ../../layouts/default.pug 
+
+block main 
+    h1(class ="mb-4 container") Thêm tài khoản người dùng
+
+    form(
+        action=`${prefixAdmin}/user/create`
+        id="form-create-user"
+        method="POST"
+        class="container"
+        enctype="multipart/form-data"
+    )
+        div(class="form-group")
+            label(for="username") Username: 
+            input(
+                type="text"
+                class="form-control"
+                id="username"
+                name="username"
+                required
+            )
+        div(class="form-group")
+            label(for="firstname") Firstname: 
+            input(
+                type="text"
+                class="form-control"
+                id="firstname"
+                name="firstname"
+            )
+        div(class="form-group")
+            label(for="lasttname") Lastname: 
+            input(
+                type="text"
+                class="form-control"
+                id="lastname"
+                name="lastname"
+            )
+        div(class="form-group")
+            label(for="email") Email
+            input(
+                class="form-control"
+                id="email"
+                name="email"
+                required
+            )
+
+        div(class="form-group")
+            label(for="gender") Giới tính:
+            input(
+                class="form-control"
+                id="gender"
+                name="gender"
+            )  
+        div(class="form-group form-check form-check-inline")
+            input(
+                type="radio"
+                class="form-check-input"
+                id="position"
+                name="position"
+                value="position"
+                checked 
+            )
+            label(for="position-1" class="form-check-label")  Accountant
+        div(class="form-group form-check form-check-inline")
+            input(
+                type="radio"
+                class="form-check-input"
+                id="position"
+                name="position"
+                value="accountant"
+            )
+            label(for="position-2" class="form-check-label") Head of a household
+
+        div(
+            class="form-group"
+            upload-image
+        )
+            label(for="image") Ảnh đại diện
+            input(
+                type="file"
+                class="form-control-file"
+                id="image"
+                name="image"
+                accept="image/*"
+                upload-image-input
+            ) 
+            img(
+                src=""
+                upload-image-preview
+            )
+        div(class="form-group")
+            button(
+                type="submit"
+                class="btn btn-primary"
+            ) Tạo mới
+
+        
+    script(src="/admin/js/user.js")

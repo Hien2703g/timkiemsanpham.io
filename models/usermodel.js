@@ -1,29 +1,19 @@
 const mongoose = require("mongoose");
 const generate = require("../helpers/generate");
 const userSchema = new mongoose.Schema({
-    fullName: String,
+    firstName: String,
+    lastName: String,
     email: String,
     password: String,
     gender: String,
-    tokenUser:{
-        type: String,
-        default: generate.generateRandomString(20)
-    },
+    image: String,
+    age: Number,
+    maidenName: String,
     phone: String,
-    avatar: String,
-    status: {
-        type: String,
-        default: "active"
-    },
+    position: String,
+    username:String,
     statusOnline: String,
-    requestFriendsList: Array,
-    acceptFriendsList: Array,
-    friendList: [
-        {
-            user_id: String,
-            room_chat_id: String
-        }
-    ],
+    
     deleted: {
         type: Boolean,
         default: false

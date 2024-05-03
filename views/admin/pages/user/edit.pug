@@ -1,0 +1,108 @@
+extends ../../layouts/default.pug 
+
+block main 
+    h1(class ="mb-4 container") Chỉnh sửa thông tin người dùng
+
+    form(
+        action=`${prefixAdmin}/user/edit/${user.id}?_method=PATCH`
+        id="form-edit-user"
+        method="POST"
+        class="container"
+        enctype="multipart/form-data"
+        
+    )
+        div(class="form-group")
+            label(for="username") Username: 
+            input(
+                type="text"
+                class="form-control"
+                id="username"
+                name="username"
+                required
+                value=user.username
+            )
+        div(class="form-group")
+            label(for="firstname") Firstname: 
+            input(
+                type="text"
+                class="form-control"
+                id="firstname"
+                name="firstname"
+                value= user.firstName
+            )
+        div(class="form-group")
+            label(for="lasttname") Lastname: 
+            input(
+                type="text"
+                class="form-control"
+                id="lastname"
+                name="lastname"
+                value=user.lastName
+            )
+        div(class="form-group")
+            label(for="email") Email
+            input(
+                class="form-control"
+                id="email"
+                name="email"
+                value=user.email
+            )
+
+        div(class="form-group")
+            label(for="gender") Giới tính:
+            input(
+                class="form-control"
+                id="gender"
+                name="gender"
+                value=user.gender
+            )  
+        div(class="form-group form-check form-check-inline")
+            input(
+                type="radio"
+                class="form-check-input"
+                id="position"
+                name="position"
+                value="accountant"
+                checked=(user.position=="accountant"?true:false)
+            )
+            label(for="position-1" class="form-check-label")  Accountant
+        div(class="form-group form-check form-check-inline")
+            input(
+                type="radio"
+                class="form-check-input"
+                id="position"
+                name="position"
+                value="head of a household"
+                checked=(user.position=="head of a household"?true:false)
+            )
+            label(for="position-2" class="form-check-label") Head of a household
+
+        div(
+            class="form-group"
+            upload-image
+        )
+            label(for="image") Ảnh đại diện
+            input(
+                type="file"
+                class="form-control-file"
+                id="image"
+                name="image"
+                accept="image/*"
+                upload-image-input
+
+            ) 
+            img(
+                src=user.image
+                upload-image-preview
+                class="image-preciew"
+                width="200px"
+                height="auto"
+            )
+        div(class="form-group")
+            button(
+                type="submit"
+                class="btn btn-primary"
+            ) Cập nhập
+
+        
+    script(src="/admin/js/user.js")

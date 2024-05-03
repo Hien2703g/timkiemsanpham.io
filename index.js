@@ -10,6 +10,10 @@ const database=require("./config/database.js");
 const routeAdmin=require("./routes/admin/index.route");
 
 const bodyParser = require('body-parser');
+
+const cookieParser=require("cookie-parser");
+const session=require("express-session");
+const flash = require('express-flash');
 database.connect();
 
 
@@ -18,9 +22,13 @@ const port = process.env.PORT;
 
 app.use(methodOverride('_method'));
 
+
 //parse application -npm i body-parser
 app.use(bodyParser.urlencoded({extended:false}));
 
+app.use(cookieParser('lemNhem'));
+app.use(session({ cookie: { maxAge: 60000 }}));
+app.use(flash());
 
 
 
